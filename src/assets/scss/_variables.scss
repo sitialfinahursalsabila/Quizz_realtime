@@ -1,0 +1,40 @@
+// ===== Warna dasar (tetap dark, terinspirasi Quizizz tapi versi malam) =====
+$color-bg-start: #1a1430;
+$color-bg-mid: #120e22;
+$color-bg-end: #07050d;
+$color-surface: #1f1a33;
+$color-surface-2: #2a2347;
+$color-border: rgba(255, 255, 255, 0.09);
+
+// Aksen utama: gradasi ungu -> pink, dipakai untuk tombol/highlight utama
+$color-primary: #8b5cf6;
+$color-primary-2: #ec4899;
+$color-primary-soft: rgba(139, 92, 246, 0.18);
+
+// Aksen sekunder dipakai bergantian biar gak monoton (badge kategori, dst)
+$color-cyan: #22d3ee;
+$color-amber: #fbbf24;
+
+$color-correct: #34d399;
+$color-correct-soft: rgba(52, 211, 153, 0.16);
+
+$color-wrong: #f87171;
+$color-wrong-soft: rgba(248, 113, 113, 0.16);
+
+$color-text: #f5f4f9;
+$color-text-muted: #9b96b8;
+
+// ===== Tipografi =====
+$font-display: 'Space Grotesk', system-ui, sans-serif;
+$font-body: 'Inter', system-ui, sans-serif;
+$font-mono: 'JetBrains Mono', monospace;
+
+// ===== Bentuk =====
+// Update: sekarang ikut gaya Quizizz -> membundar. Dipecah jadi beberapa
+// skala radius supaya elemen besar & kecil proporsional (bukan asal sama).
+$radius-lg: 26px; // card besar
+$radius-md: 14px; // tombol, input, kotak opsi jawaban
+$radius-sm: 10px; // badge, tag kecil
+
+$shadow-card: 0 30px 60px -28px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+$shadow-glow-primary: 0 8px 24px -6px rgba(139, 92, 246, 0.55);

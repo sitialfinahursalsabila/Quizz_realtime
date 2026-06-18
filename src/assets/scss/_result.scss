@@ -1,0 +1,233 @@
+@use 'variables' as *;
+
+// Lingkaran skor -- elemen bulat yang disengaja, dikasih gradasi border
+// biar senada dengan tombol utama.
+.score-circle {
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  background: $color-surface;
+  border: 6px solid transparent;
+  background-image:
+    linear-gradient($color-surface, $color-surface),
+    linear-gradient(135deg, $color-primary, $color-primary-2);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 12px auto 26px;
+}
+
+.score-number {
+  font-family: $font-mono;
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.score-label {
+  font-size: 0.72rem;
+  color: $color-text-muted;
+}
+
+// ===== Stat boxes =====
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.stat-box {
+  background: $color-surface-2;
+  border-radius: $radius-md;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid $color-border;
+}
+
+.stat-value {
+  font-family: $font-mono;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: $color-text-muted;
+}
+
+.stat-correct .stat-value {
+  color: $color-correct;
+}
+
+.stat-wrong .stat-value {
+  color: $color-wrong;
+}
+
+// ===== Review per soal =====
+.review {
+  margin-bottom: 22px;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: 14px 16px;
+}
+
+.review summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.review-list {
+  margin: 14px 0 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.review-item {
+  border-top: 1px solid $color-border;
+  padding-top: 12px;
+}
+
+.review-question {
+  font-weight: 600;
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+}
+
+.review-answer {
+  margin: 0 0 4px;
+  font-size: 0.84rem;
+  color: $color-text-muted;
+}
+
+.review-tag {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: $radius-sm;
+}
+
+.tag-correct {
+  background: $color-correct-soft;
+  color: $color-correct;
+}
+
+.tag-wrong {
+  background: $color-wrong-soft;
+  color: $color-wrong;
+}
+
+// ===== Performance banner: semangat / lumayan / reward =====
+.performance-banner {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: $radius-lg;
+  border: 1px solid $color-border;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.performance-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.performance-title {
+  font-weight: 700;
+  margin: 0 0 4px;
+  font-family: $font-display;
+}
+
+.performance-message {
+  margin: 0;
+  font-size: 0.85rem;
+  color: $color-text-muted;
+  line-height: 1.4;
+}
+
+.banner-encouragement {
+  background: $color-primary-soft;
+  border-color: rgba($color-primary, 0.4);
+
+  .performance-title {
+    color: #c9b6ff;
+  }
+}
+
+.banner-good {
+  background: $color-surface-2;
+}
+
+.banner-reward {
+  background: $color-correct-soft;
+  border-color: rgba($color-correct, 0.5);
+
+  .performance-title {
+    color: $color-correct;
+  }
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  left: calc(8% * var(--i));
+  width: 6px;
+  height: 10px;
+  border-radius: 2px;
+  background: $color-primary;
+  opacity: 0.85;
+  animation: confetti-fall 1.6s ease-in forwards;
+  animation-delay: calc(var(--i) * 70ms);
+
+  &:nth-child(4n + 1) {
+    background: $color-primary-2;
+  }
+  &:nth-child(4n + 2) {
+    background: $color-correct;
+  }
+  &:nth-child(4n + 3) {
+    background: $color-amber;
+  }
+  &:nth-child(4n + 4) {
+    background: $color-cyan;
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(110px) rotate(220deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti-piece {
+    animation: none;
+    display: none;
+  }
+}

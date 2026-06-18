@@ -1,0 +1,111 @@
+@use 'variables' as *;
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.brand-mark {
+  font-size: 1.6rem;
+}
+
+.brand-name {
+  font-family: $font-display;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, $color-primary, $color-primary-2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow {
+  font-family: $font-mono;
+  font-size: 0.78rem;
+  color: $color-primary-2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.subtitle {
+  color: $color-text-muted;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0 0 22px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field-label {
+  font-size: 0.82rem;
+  color: $color-text-muted;
+  font-weight: 500;
+}
+
+.hint-text {
+  font-size: 0.76rem;
+  color: $color-text-muted;
+}
+
+// Input/select membundar (radius-md) dengan glow ungu lembut saat fokus.
+.input {
+  background: $color-surface-2;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  color: $color-text;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:focus {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px $color-primary-soft;
+  }
+}
+
+.error-text {
+  color: $color-wrong;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.switch-text {
+  margin: 18px 0 0;
+  font-size: 0.85rem;
+  color: $color-text-muted;
+  text-align: center;
+}
+
+.settings-history-btn {
+  margin-top: 14px;
+}

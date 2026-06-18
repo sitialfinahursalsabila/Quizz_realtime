@@ -1,0 +1,200 @@
+@use 'variables' as *;
+
+.quiz-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 640px;
+  width: 100%;
+  margin: 8px auto 0;
+
+  @media (max-width: 480px) {
+    align-items: flex-start;
+  }
+}
+
+.quiz-body {
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.quiz-footer {
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+// ===== Progress bar =====
+.progress-wrap {
+  flex: 1;
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: $color-text-muted;
+  margin-bottom: 6px;
+}
+
+.progress-track {
+  height: 8px;
+  border-radius: $radius-sm;
+  background: $color-surface-2;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: $radius-sm;
+  background: linear-gradient(90deg, $color-primary, $color-primary-2);
+  transition: width 0.3s ease;
+}
+
+// ===== Timer ring (lingkaran, elemen yang sengaja bulat) =====
+.timer {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-ring {
+  transform: rotate(-90deg);
+}
+
+.timer-ring-bg {
+  fill: none;
+  stroke: $color-surface-2;
+  stroke-width: 5;
+}
+
+.timer-ring-fg {
+  fill: none;
+  stroke: $color-primary-2;
+  stroke-width: 5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.4s linear, stroke 0.2s ease;
+}
+
+.timer-urgent {
+  .timer-ring-fg {
+    stroke: $color-wrong;
+  }
+  .timer-label {
+    color: $color-wrong;
+  }
+}
+
+.timer-label {
+  position: absolute;
+  font-family: $font-mono;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+// ===== Question card =====
+.question-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.question-meta {
+  display: flex;
+  gap: 8px;
+}
+
+.question-number {
+  font-family: $font-mono;
+  font-size: 0.85rem;
+  color: $color-text-muted;
+  margin: 0;
+  font-weight: 500;
+}
+
+.question-text {
+  font-family: $font-display;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.options-grid-2col {
+  grid-template-columns: 1fr 1fr;
+}
+
+// Tiap opsi dapat garis aksen warna berbeda di kiri (gaya Kahoot/Quizizz),
+// murni dekoratif berdasarkan urutan tampil -- bukan penanda jawaban benar.
+.option-btn {
+  position: relative;
+  text-align: left;
+  background: $color-surface-2;
+  border: 1px solid $color-border;
+  border-left: 4px solid transparent;
+  border-radius: $radius-md;
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.5);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+
+  &:nth-child(4n + 1) {
+    border-left-color: #fb7185;
+  }
+  &:nth-child(4n + 2) {
+    border-left-color: $color-cyan;
+  }
+  &:nth-child(4n + 3) {
+    border-left-color: $color-amber;
+  }
+  &:nth-child(4n + 4) {
+    border-left-color: #4ade80;
+  }
+
+  &.is-correct {
+    background: $color-correct-soft;
+    border-color: $color-correct;
+    border-left-color: $color-correct;
+    color: $color-correct;
+  }
+
+  &.is-wrong {
+    background: $color-wrong-soft;
+    border-color: $color-wrong;
+    border-left-color: $color-wrong;
+    color: $color-wrong;
+  }
+
+  &.is-correct-muted {
+    border-color: $color-correct;
+    border-left-color: $color-correct;
+    opacity: 0.7;
+  }
+
+  &.is-disabled {
+    opacity: 0.45;
+  }
+}

@@ -12,7 +12,9 @@ export function decodeText(text) {
   }
 }
 
-// Fisher-Yates shuffle, tidak memodifikasi array asli.
+// Algoritma Fisher-Yates shuffle (O(n)) — cara standar mengacak urutan
+// array secara adil (setiap kemungkinan urutan punya peluang yang sama).
+// Tidak memodifikasi array asli (immutability), hasilnya array baru.
 export function shuffleArray(array) {
   const result = [...array]
   for (let i = result.length - 1; i > 0; i--) {

@@ -1,0 +1,54 @@
+@use 'variables' as *;
+
+.btn {
+  border: none;
+  border-radius: $radius-md;
+  padding: 13px 22px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Tombol utama pakai gradasi ungu-pink + efek "mengangkat" saat hover,
+// mirip gaya tombol CTA di Quizizz/Kahoot.
+.btn-primary {
+  background: linear-gradient(135deg, $color-primary, $color-primary-2);
+  color: #fff;
+  box-shadow: $shadow-glow-primary;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -8px rgba($color-primary, 0.65);
+  }
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-ghost {
+  background: $color-surface-2;
+  border: 1px solid $color-border;
+  color: $color-text-muted;
+
+  &:hover {
+    border-color: $color-primary;
+    color: $color-text;
+  }
+}
+
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

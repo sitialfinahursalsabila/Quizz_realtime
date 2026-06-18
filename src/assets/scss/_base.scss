@@ -1,0 +1,46 @@
+@use 'variables' as *;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  // Tetap gelap, tapi dikasih dua titik warna (ungu di atas, hampir hitam
+  // di bawah) biar lebih hidup dibanding gradasi datar sebelumnya.
+  background:
+    radial-gradient(circle at 15% -10%, rgba($color-primary, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 100% 0%, rgba($color-primary-2, 0.22) 0%, transparent 40%),
+    linear-gradient(180deg, $color-bg-start 0%, $color-bg-mid 45%, $color-bg-end 100%);
+  background-attachment: fixed;
+  color: $color-text;
+  font-family: $font-body;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-surface-2;
+  border-radius: $radius-sm;
+}

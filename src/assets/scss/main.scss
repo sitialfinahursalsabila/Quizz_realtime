@@ -1,0 +1,10 @@
+// Entry point SCSS - menggabungkan seluruh partial.
+// Pakai @use (bukan @import yang sudah deprecated di Sass modern).
+@use 'base';
+@use 'layout';
+@use 'forms';
+@use 'buttons';
+@use 'common';
+@use 'quiz';
+@use 'result';
+@use 'history';
