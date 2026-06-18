@@ -88,8 +88,6 @@ export class AuthService {
   getHistory(username) {
     const user = this.getUser(username)
     if (!user) return []
-    // Algoritma sorting (comparison-based): urutkan dari yang TERBARU dulu.
-    // [...array] dipakai supaya tidak mengubah array asli (immutability).
     return [...user.history].sort((a, b) => b.finishedAt - a.finishedAt)
   }
 }

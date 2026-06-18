@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { useCountdown } from '../hooks/useCountdown'
 import Timer from '../components/quiz/Timer'
 import ProgressBar from '../components/quiz/ProgressBar'
 import QuestionCard from '../components/quiz/QuestionCard'
+import AnswerFeedback from '../components/quiz/AnswerFeedback'
 import Button from '../components/common/Button'
 
 export default function QuizPage({
@@ -18,9 +20,26 @@ export default function QuizPage({
   const answeredCount = answers.filter((answer) => answer !== null).length
   const currentQuestion = questions[currentIndex]
 
+
+  const [pendingOption, setPendingOption] = useState(null)
+
+  function handleSelectOption(option) {
+    setPendingOption(option)
+  }
+
+  function handleContinue() {
+    onAnswer(pendingOption)
+    setPendingOption(null)
+  }
+
   function handleFinishEarly() {
     const confirmed = window.confirm('Selesaikan kuis sekarang? Soal yang belum dijawab akan dihitung salah.')
     if (confirmed) onFinishEarly()
+  }
+
+  if (pendingOption !== null) {
+    const isCorrect = pendingOption === currentQuestion.correctAnswer
+    return <AnswerFeedback isCorrect={isCorrect} onNext={handleContinue} />
   }
 
   return (
@@ -31,7 +50,12 @@ export default function QuizPage({
       </div>
 
       <div className="quiz-body">
-        <QuestionCard key={currentIndex} question={currentQuestion} questionNumber={currentIndex + 1} onAnswer={onAnswer} />
+        <QuestionCard
+          key={currentIndex}
+          question={currentQuestion}
+          questionNumber={currentIndex + 1}
+          onAnswer={handleSelectOption}
+        />
       </div>
 
       <div className="quiz-footer">
