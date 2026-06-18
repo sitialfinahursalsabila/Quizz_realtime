@@ -1,4 +1,7 @@
+import { useEffect, useRef, useState } from 'react'
 import Badge from '../common/Badge'
+
+const ADVANCE_DELAY_MS = 550
 
 const DIFFICULTY_LABEL = {
   easy: 'Mudah',
@@ -7,6 +10,34 @@ const DIFFICULTY_LABEL = {
 }
 
 export default function QuestionCard({ question, questionNumber, onAnswer }) {
+  const [selectedOption, setSelectedOption] = useState(null)
+  const timeoutRef = useRef(null)
+
+  // Bersihkan timeout kalau komponen unmount sebelum delay selesai
+  // (misalnya timer kuis habis tepat saat user baru klik jawaban).
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+    }
+  }, [])
+
+  function handleSelect(option) {
+    if (selectedOption !== null) return // sudah menjawab, cegah klik dobel
+    setSelectedOption(option)
+    timeoutRef.current = setTimeout(() => {
+      onAnswer(option)
+    }, ADVANCE_DELAY_MS)
+  }
+
+  function optionClassName(option) {
+    if (selectedOption === null) return 'option-btn'
+    if (option === selectedOption) {
+      return option === question.correctAnswer ? 'option-btn is-correct' : 'option-btn is-wrong'
+    }
+    if (option === question.correctAnswer) return 'option-btn is-correct-muted'
+    return 'option-btn is-disabled'
+  }
+
   return (
     <div className="card question-card">
       <div className="question-meta">
@@ -19,7 +50,13 @@ export default function QuestionCard({ question, questionNumber, onAnswer }) {
 
       <div className={`options-grid ${question.type === 'boolean' ? 'options-grid-2col' : ''}`}>
         {question.options.map((option) => (
-          <button key={option} type="button" className="option-btn" onClick={() => onAnswer(option)}>
+          <button
+            key={option}
+            type="button"
+            className={optionClassName(option)}
+            onClick={() => handleSelect(option)}
+            disabled={selectedOption !== null}
+          >
             {option}
           </button>
         ))}

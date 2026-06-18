@@ -72,7 +72,7 @@ export default function SettingsPage({ username, onStart, isLoading, errorMessag
   return (
     <div className="screen screen-center">
       <Card>
-        <p className="eyebrow">Halo, {username} 👋</p>
+        <p className="eyebrow">Halo, {username} </p>
         <h1 className="title">Atur Kuismu</h1>
         <p className="subtitle">Jumlah soal, tipe soal, dan durasi waktu sepenuhnya bebas kamu tentukan.</p>
 

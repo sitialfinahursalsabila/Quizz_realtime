@@ -203,12 +203,15 @@
   &:nth-child(4n + 1) {
     background: $color-primary-2;
   }
+
   &:nth-child(4n + 2) {
     background: $color-correct;
   }
+
   &:nth-child(4n + 3) {
     background: $color-amber;
   }
+
   &:nth-child(4n + 4) {
     background: $color-cyan;
   }
@@ -219,6 +222,7 @@
     transform: translateY(0) rotate(0deg);
     opacity: 0.9;
   }
+
   100% {
     transform: translateY(110px) rotate(220deg);
     opacity: 0;
@@ -229,5 +233,31 @@
   .confetti-piece {
     animation: none;
     display: none;
+  }
+}
+
+/* =========================
+   RESULT IMAGE
+========================= */
+.result-image {
+  width: 100%;
+  max-width: 160px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  display: block;
+  margin: 12px auto 16px;
+}
+
+@media (max-width: 768px) {
+  .result-image {
+    max-width: 140px;
+    margin: 8px auto 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .result-image {
+    max-width: 110px;
+    margin: 6px auto 10px;
   }
 }

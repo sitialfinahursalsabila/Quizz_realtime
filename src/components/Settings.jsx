@@ -68,7 +68,7 @@ export default function Settings({ userName, onStart, isLoading, errorMessage })
   return (
     <div className="screen screen-center">
       <div className="card card-narrow">
-        <p className="eyebrow">Halo, {userName} 👋</p>
+        <p className="eyebrow">Halo, {userName} </p>
         <h1 className="title">Atur Kuismu</h1>
         <p className="subtitle">Jumlah soal, tipe soal, dan durasi waktu sepenuhnya bebas kamu tentukan.</p>
 

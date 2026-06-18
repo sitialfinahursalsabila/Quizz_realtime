@@ -12,7 +12,6 @@ import Loader from './components/common/Loader'
 
 const SESSION_STORAGE_KEY = 'quizdash_session_v1'
 
-// 'login' | 'register' | 'settings' | 'quiz' | 'result' | 'history'
 const INITIAL_SESSION = {
   username: null,
   stage: 'login',
@@ -163,7 +162,7 @@ export default function App() {
               </button>
             )}
             <button type="button" className="link-btn" onClick={handleLogout}>
-              Keluar ({session.username})
+              Keluar
             </button>
           </div>
         )}

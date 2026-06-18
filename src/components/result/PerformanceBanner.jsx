@@ -4,19 +4,16 @@ import { PERFORMANCE_TIER } from '../../models/QuizAttempt'
 // ganti copy/icon, gak perlu utak-atik logic JSX di bawah.
 const TIER_CONTENT = {
   [PERFORMANCE_TIER.ENCOURAGEMENT]: {
-    icon: '🌱',
     title: 'Tetap Semangat!',
     message: 'Belum maksimal gak masalah, ini baru pemanasan. Pelan-pelan, pasti naik kok!',
     bannerClass: 'banner-encouragement',
   },
   [PERFORMANCE_TIER.GOOD]: {
-    icon: '👍',
     title: 'Lumayan, Terus Tingkatkan!',
     message: 'Hasil kamu udah cukup baik. Sedikit lagi buat nembus level Excellent.',
     bannerClass: 'banner-good',
   },
   [PERFORMANCE_TIER.EXCELLENT]: {
-    icon: '🏆',
     title: 'Reward: Performa Excellent!',
     message: 'Jawabanmu cepat & tepat. Sebagai apresiasi, kamu dapat lencana Bonus Time Master 🎉',
     bannerClass: 'banner-reward',
