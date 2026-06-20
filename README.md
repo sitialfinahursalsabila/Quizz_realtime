@@ -1,113 +1,116 @@
-# ⚡ QuizDash
+# Quiz Realtime
 
-Aplikasi kuis interaktif berbasis **React + Vite** yang mengambil soal langsung dari [Open Trivia Database](https://opentdb.com/) — lengkap dengan sistem akun, riwayat skor, timer, dan kemampuan resume otomatis.
+A quiz application built with React and Vite that fetches questions in real-time from the Open Trivia Database (OpenTDB), complete with account-based authentication, score history, a configurable timer, and an automatic resume mechanism.
 
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=000&style=flat-square)
-![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=fff&style=flat-square)
-![Sass](https://img.shields.io/badge/Sass-SCSS-CC6699?logo=sass&logoColor=fff&style=flat-square)
-![OpenTDB](https://img.shields.io/badge/API-OpenTDB-2b2b2b?style=flat-square)
+Live demo: https://quizz-realtime.vercel.app
 
----
+## Table of Contents
 
-## 📋 Daftar Isi
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Assignment Criteria Mapping](#assignment-criteria-mapping)
+- [Concepts Applied](#concepts-applied)
+- [Security Notes](#security-notes)
+- [Deployment](#deployment)
 
-- [Fitur Utama](#-fitur-utama)
-- [Cara Menjalankan](#-cara-menjalankan)
-- [Struktur Folder](#-struktur-folder)
-- [Pemenuhan Kriteria Tugas](#-pemenuhan-kriteria-tugas)
-- [Konsep Pemrograman yang Diterapkan](#-konsep-pemrograman-yang-diterapkan)
-- [Catatan Keamanan](#-catatan-keamanan)
-- [Upload ke GitHub](#-upload-ke-github)
+## Features
 
----
+- Account-based authentication (register and login), persisted in the browser via localStorage
+- Questions fetched in real-time from the OpenTDB API, with no hardcoded data
+- Fully configurable quiz settings: number of questions, category, type, and difficulty
+- Real-time progress indicator showing current question position and number answered
+- Countdown timer with configurable duration, displayed as a circular progress ring
+- One question displayed per page, with automatic advancement after each answer
+- Automatic session closure and result display once the timer reaches zero
+- Resume mechanism: quiz progress and remaining time are preserved accurately even if the browser is closed mid-session
+- Score history saved per account, viewable on a dedicated history page
+- Adaptive performance feedback on the result page, based on overall score percentage
+- Streak feedback triggered every five consecutive correct or incorrect answers
 
-## ✨ Fitur Utama
+## Getting Started
 
-- 🔐 **Akun sungguhan** — daftar & login dengan username/password, tersimpan persisten di browser (localStorage), bisa logout lalu login lagi kapan saja
-- 🌐 **Soal real-time dari OpenTDB** — kategori, jumlah, tipe (pilihan ganda / benar-salah), dan tingkat kesulitan bisa diatur bebas
-- 📊 **Progress & timer** — jumlah soal terjawab ditampilkan real-time, timer berbentuk ring yang berkurang seiring waktu
-- ➡️ **Satu soal per halaman** — otomatis pindah ke soal berikutnya setelah dijawab
-- ⏰ **Auto-submit saat waktu habis** — soal otomatis ditutup dan hasil langsung ditampilkan
-- 💾 **Resume otomatis** — tutup browser di tengah kuis, timer & posisi soal tetap akurat saat dibuka lagi
-- 🏆 **Banner performa adaptif** — tampilan berbeda di halaman hasil tergantung skor (semangat / lumayan / reward + confetti)
-- 📜 **Riwayat per akun** — setiap pengerjaan otomatis tersimpan ke akun, bisa dilihat lagi lewat halaman Riwayat
-- 🎨 **Desain dark & colorful** — terinspirasi tampilan game-show modern (Quizizz-style), dengan sudut membundar dan aksen gradasi ungu-pink
-
-## 🚀 Cara Menjalankan
+Install dependencies and start the development server:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Lalu buka `http://localhost:5173` di browser. Tidak perlu Laragon/Apache/PHP — proyek ini murni frontend (cukup Node.js + Vite dev server), karena soal diambil langsung dari API publik lewat `fetch()`.
+Open `http://localhost:5173` in your browser. No backend server is required since this is a frontend-only application that communicates directly with the OpenTDB public API.
 
-Build untuk produksi:
+To build for production:
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## 📁 Struktur Folder
+## Project Structure
 
 ```
 quiz-app/
 ├── index.html
 ├── package.json
 ├── vite.config.js
+├── public/
+│   └── images/
+│       ├── correct.png
+│       └── wrong.png
 └── src/
-    ├── main.jsx                   # entry point React
-    ├── App.jsx                    # state machine: login/register → settings → quiz → result → history
+    ├── main.jsx
+    ├── App.jsx
     │
-    ├── assets/scss/                # seluruh styling, dipecah per partial (Sass)
-    │   ├── main.scss               #   entry, @use semua partial
-    │   ├── _variables.scss         #   token warna, font, radius
-    │   ├── _base.scss              #   reset & background
-    │   ├── _layout.scss            #   app-shell, header, screen, card
-    │   ├── _forms.scss             #   input, select, label
-    │   ├── _buttons.scss           #   tombol
-    │   ├── _common.scss            #   badge, loader
-    │   ├── _quiz.scss              #   question card, timer ring, progress bar
-    │   ├── _result.scss            #   stats, review, banner semangat/reward
-    │   └── _history.scss           #   halaman riwayat
+    ├── assets/scss/
+    │   ├── main.scss
+    │   ├── _variables.scss
+    │   ├── _base.scss
+    │   ├── _layout.scss
+    │   ├── _forms.scss
+    │   ├── _buttons.scss
+    │   ├── _common.scss
+    │   ├── _quiz.scss
+    │   ├── _result.scss
+    │   └── _history.scss
     │
     ├── api/
-    │   └── opentdb.js              # semua komunikasi ke OpenTDB API
+    │   └── opentdb.js
     │
-    ├── models/                     # class OOP (encapsulation)
-    │   ├── User.js                 #   akun + statistik riwayat
-    │   └── QuizAttempt.js          #   satu baris riwayat + logic kategori performa
+    ├── models/
+    │   ├── User.js
+    │   └── QuizAttempt.js
     │
     ├── services/
-    │   └── AuthService.js          # register/login + simpan riwayat (struktur data Map)
+    │   └── AuthService.js
     │
     ├── hooks/
-    │   ├── useLocalStorage.js      # sinkron state React <-> localStorage (basis resume)
-    │   └── useCountdown.js         # timer berbasis timestamp absolut (akurat lintas reload)
+    │   ├── useLocalStorage.js
+    │   └── useCountdown.js
     │
     ├── utils/
-    │   ├── helpers.js              # decode teks HTML, shuffle (Fisher-Yates), format waktu
-    │   └── hash.js                 # hashing password sederhana (djb2)
+    │   ├── helpers.js
+    │   └── hash.js
     │
     ├── components/
-    │   ├── common/                 # atom UI generik, dipakai di banyak halaman
+    │   ├── common/
     │   │   ├── Button.jsx
     │   │   ├── Input.jsx
     │   │   ├── Select.jsx
     │   │   ├── Card.jsx
     │   │   ├── Badge.jsx
     │   │   └── Loader.jsx
-    │   ├── quiz/                   # komponen khusus saat kuis berjalan
+    │   ├── quiz/
     │   │   ├── QuestionCard.jsx
     │   │   ├── Timer.jsx
-    │   │   └── ProgressBar.jsx
-    │   └── result/                 # komponen khusus halaman hasil
+    │   │   ├── ProgressBar.jsx
+    │   │   ├── AnswerFeedback.jsx
+    │   │   └── StreakPopup.jsx
+    │   └── result/
     │       ├── PerformanceBanner.jsx
     │       ├── StatsGrid.jsx
     │       └── ReviewList.jsx
     │
-    └── pages/                      # satu file = satu halaman penuh
+    └── pages/
         ├── LoginPage.jsx
         ├── RegisterPage.jsx
         ├── SettingsPage.jsx
@@ -116,47 +119,43 @@ quiz-app/
         └── HistoryPage.jsx
 ```
 
-## ✅ Pemenuhan Kriteria Tugas
+## Assignment Criteria Mapping
 
-| # | Kriteria | Implementasi |
+| Point | Criteria | Implementation |
 |---|---|---|
-| a | Fitur login | `pages/LoginPage.jsx` + `pages/RegisterPage.jsx`, akun nyata via `AuthService` |
-| b | Soal dari opentdb.com | `api/opentdb.js` |
-| c | Jumlah & tipe soal bebas diatur | `pages/SettingsPage.jsx` |
-| d | Total soal & jumlah dikerjakan ditampilkan | `components/quiz/ProgressBar.jsx` |
-| e | Timer pengerjaan | `components/quiz/Timer.jsx` + `hooks/useCountdown.js` |
-| f | Satu soal per halaman, otomatis pindah | `components/quiz/QuestionCard.jsx` |
-| g | Timer habis → tutup soal & tampilkan hasil | `App.jsx` (`handleTimeUp`) + `pages/ResultPage.jsx` |
-| h | Resume saat browser ditutup | `hooks/useLocalStorage.js`, timer disimpan sebagai timestamp (`endAt`), bukan counter biasa |
+| a | Login feature | `pages/LoginPage.jsx`, `pages/RegisterPage.jsx`, `services/AuthService.js` |
+| b | Questions sourced from opentdb.com | `api/opentdb.js` |
+| c | Free question count and type | `pages/SettingsPage.jsx` |
+| d | Total questions and answered count displayed | `components/quiz/ProgressBar.jsx` |
+| e | Quiz timer | `components/quiz/Timer.jsx`, `hooks/useCountdown.js` |
+| f | One question per page, automatic advance | `components/quiz/QuestionCard.jsx`, `pages/QuizPage.jsx` |
+| g | Timer expiry closes the quiz and shows results | `App.jsx`, `pages/ResultPage.jsx` |
+| h | Resume after browser is closed | `hooks/useLocalStorage.js`, timer stored as an absolute timestamp |
 
-## 🧠 Konsep Pemrograman yang Diterapkan
+## Concepts Applied
 
-| Konsep | Penjelasan | Lokasi |
+| Concept | Description | Location |
 |---|---|---|
-| OOP — Encapsulation | Data & perilaku digabung dalam satu class, gak nyebar di komponen UI | `models/User.js`, `models/QuizAttempt.js` |
-| OOP — Factory Method | Method statis untuk membangun object dari data mentah | `QuizAttempt.fromAnswers()`, `User.fromJSON()` |
-| OOP — Singleton | Satu instance service dipakai bersama di seluruh app | `services/AuthService.js` (`export const authService`) |
-| Struktur Data — Map | Pencarian akun by-username O(1), tanpa looping | `AuthService` |
-| Algoritma — Fisher-Yates Shuffle | Mengacak posisi opsi jawaban secara adil, O(n) | `utils/helpers.js` |
-| Algoritma — Hashing (djb2) | Password tidak tersimpan sebagai teks polos | `utils/hash.js` |
-| Algoritma — Sorting | Riwayat diurutkan dari yang terbaru | `AuthService.getHistory()` |
-| Algoritma — Agregasi (reduce) | Hitung skor terbaik & rata-rata | `User.getBestScore()`, `User.getAverageScore()` |
+| OOP — Encapsulation | Data and behavior combined into a single class | `models/User.js`, `models/QuizAttempt.js` |
+| OOP — Factory Method | Static methods that construct objects from raw data | `QuizAttempt.fromAnswers()`, `User.fromJSON()` |
+| OOP — Singleton | A single shared service instance used across the app | `services/AuthService.js` |
+| Data Structure — Map | O(1) account lookup by username | `AuthService` |
+| Algorithm — Fisher-Yates Shuffle | Fair randomization of answer order | `utils/helpers.js` |
+| Algorithm — Hashing (djb2) | Simple password hashing before storage | `utils/hash.js` |
+| Algorithm — Sorting | History sorted by most recent attempt | `AuthService.getHistory()` |
+| Algorithm — Aggregation | Best score and average score calculation | `User.getBestScore()`, `User.getAverageScore()` |
 
-## 🔒 Catatan Keamanan
+## Security Notes
 
-Password di-hash dengan algoritma sederhana (bukan bcrypt/argon2) dan disimpan di localStorage browser. Ini cukup untuk keperluan tugas/demo, **tapi jangan dipakai untuk data sensitif sungguhan** — localStorage bisa diakses lewat DevTools dan tidak ada server yang memverifikasi kredensial.
+Passwords are hashed using a simple non-cryptographic algorithm (not bcrypt or argon2) and stored in the browser's localStorage. This is sufficient for an academic assignment or demo purpose, but should not be used for real sensitive data, since localStorage can be inspected through browser DevTools and there is no server-side verification.
 
-## 📤 Upload ke GitHub
+## Deployment
+
+This project is deployed on Vercel as a static frontend build:
 
 ```bash
-git init
-git add .
-git commit -m "feat: quiz app with accounts, history, opentdb, timer, resume"
-git branch -M main
-git remote add origin <URL_REPO_GITHUB_KAMU>
-git push -u origin main
+npm run build
 ```
 
----
-
-<p align="center">Dibuat dengan React + Vite ⚡</p>
+The `dist/` output can be deployed directly to Vercel, Netlify, or any static hosting provider, since the application communicates with the OpenTDB API directly from the client and requires no backend server.
+```
