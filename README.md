@@ -158,4 +158,3 @@ npm run build
 ```
 
 The `dist/` output can be deployed directly to Vercel, Netlify, or any static hosting provider, since the application communicates with the OpenTDB API directly from the client and requires no backend server.
-```
